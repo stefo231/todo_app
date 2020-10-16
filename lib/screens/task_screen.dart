@@ -22,7 +22,13 @@ class _TasksScreenState extends State<TasksScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTaskScreen());
+              context: context,
+              builder: (context) => AddTaskScreen((newTaskTitle) {
+                    setState(() {
+                      tasks.add(Task(name: newTaskTitle));
+                    });
+                    Navigator.pop(context);
+                  }));
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -57,7 +63,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length}',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
